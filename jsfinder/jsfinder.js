@@ -33,10 +33,7 @@ Content.prototype.fetch = function(url) {
     `https://cors-anywhere.herokuapp.com/${urlValue}`
   ];
 
-  return tryFetchWithProxies(corsProxies, 0)
-  .then(html => {
-    return html;
-  })
+  return tryFetchWithProxies(corsProxies, 0);
 }
 
 let content = new Content();
