@@ -16,15 +16,14 @@ function tryFetchWithProxies(proxies, index) {
     })
     .catch(error => {
       console.error(`Error with proxy ${index}:`, error);
-      // Try the next proxy recursively
       return tryFetchWithProxies(proxies, index + 1);
     });
 }
 
-Content.prototype.fetchCode = function(url) {
+Content.prototype.fetch = function(url) {
   const urlValue = typeof url === 'string' ? url.trim() : url?.value?.trim();
   if (!urlValue) {
-    alert("Invalid URL");
+    console.log("Invalid URL");
     return Promise.reject(new Error("Invalid URL"));
   }
 
@@ -34,7 +33,10 @@ Content.prototype.fetchCode = function(url) {
     `https://cors-anywhere.herokuapp.com/${urlValue}`
   ];
 
-  return tryFetchWithProxies(corsProxies, 0); 
+  return tryFetchWithProxies(corsProxies, 0)
+  .then(html => {
+    return html;
+  })
 }
 
 let content = new Content();
